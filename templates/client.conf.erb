@@ -88,7 +88,7 @@ news.notice                     -/var/log/news/news.notice
 daemon.*;mail.*;\
         news.err;\
         *.=debug;*.=info;\
-        *.=notice;*.=warn       |/dev/xconsole
+        *.=notice;*.=warn       |/dev/console
 <% elsif scope.lookupvar('rsyslog::log_style') == 'redhat' -%>
 # Log all kernel messages to the console.
 # Logging much else clutters up the screen.
