@@ -24,6 +24,8 @@ class rsyslog::params {
       $purge_rsyslog_d        = false
       $rsyslog_conf           = '/etc/rsyslog.conf'
       $rsyslog_default        = '/etc/default/rsyslog'
+      $server_relp_conf       = '/etc/logstash/conf.d/relp.conf'
+      #$client_relp_conf       = '/etc/rsyslog.d/99-relp.conf'
       $default_config_file    = 'rsyslog_default'
       $run_user               = 'root'
       $run_group              = 'root'
@@ -32,6 +34,7 @@ class rsyslog::params {
       $log_style              = 'debian'
       $perm_file              = '0640'
       $perm_dir               = '0755'
+      $relp_port              = '5545'
       $spool_dir              = '/var/spool/rsyslog'
       $service_name           = 'rsyslog'
       $client_conf            = 'client'

@@ -19,3 +19,13 @@ class rsyslog::service {
     require    => Class['rsyslog::config'],
   }
 }
+
+class rsyslog::logstash::service {
+  service { $rsyslog::service_name:
+    ensure     => running,
+    enable     => true,
+    hasstatus  => true,
+    hasrestart => true,
+    require    => Class['rsyslog::logstash::config'],
+  }
+}

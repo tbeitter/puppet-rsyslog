@@ -1,0 +1,10 @@
+input {
+    relp {
+        port => <%= scope.lookupvar('rsyslog::relp_port') %>
+    }
+}
+
+output {
+    elasticsearch {
+    }
+}

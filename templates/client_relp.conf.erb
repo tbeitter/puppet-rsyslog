@@ -1,0 +1,5 @@
+module(load="omrelp")
+<%- scope.lookupvar('rsyslog::client::remote_relp').flatten.compact.each do |server| -%>
+<%- target,tport = server.split(":") -%>
+action(type="omrelp" target="<%= target %>" <% if tport.nil? or tport.empty? %>port="5545"<% else %>port="<%= tport %>"<% end %>)
+<%- end -%>

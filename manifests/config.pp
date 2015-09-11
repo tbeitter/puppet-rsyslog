@@ -39,6 +39,28 @@ class rsyslog::config {
     notify  => Class['rsyslog::service'],
   }
 
+  if $rsyslog::server::relp_port {
+    file { $rsyslog::server_relp_conf:
+      ensure  => file,
+      owner   => 'root',
+      group   => $rsyslog::run_group,
+      content => template("${module_name}/server_relp.conf.erb"),
+      require => [Class['rsyslog::install::logstash'], Package['logstash']],
+      notify  => Class['rsyslog::service::logstash'],
+    }
+  }
+
+  #if $rsyslog::client::remote_relp {
+  #  file { $rsyslog::client_relp_conf:
+  #    ensure  => file,
+  #    owner   => 'root',
+  #    group   => $rsyslog::run_group,
+  #    content => template("${module_name}/client_relp.conf.erb"),
+  #    require => Class['rsyslog::install::logstash'],
+  #    notify  => Class['rsyslog::service::logstash'],
+  #  }
+  #}
+
   file { $rsyslog::spool_dir:
     ensure  => directory,
     owner   => 'root',

@@ -13,6 +13,7 @@
 # [*ssl_ca*]
 # [*ssl_cert*]
 # [*ssl_key*]
+# [*relp_port*]
 #
 # === Variables
 #
@@ -39,9 +40,12 @@ class rsyslog::server (
   $ssl_ca                    = undef,
   $ssl_cert                  = undef,
   $ssl_key                   = undef,
-  $rotate                    = undef
+  $rotate                    = undef,
+  $relp_port                 = undef,
 ) inherits rsyslog {
 
+  include rsyslog::install::logstash
+ 
   ### Logrotate policy
   $logpath = $rotate ? {
     'year'   => '/%$YEAR%/',

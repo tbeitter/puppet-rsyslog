@@ -15,6 +15,7 @@
 # [*remote_type*]
 # [*port*]
 # [*remote_servers*]
+# [*remote_relp*]
 # [*ssl_ca*]
 # [*log_templates*]
 # [*actionfiletemplate*]
@@ -36,6 +37,7 @@ class rsyslog::client (
   $server             = 'log',
   $port               = '514',
   $remote_servers     = false,
+  $remote_relp        = undef,
   $ssl_ca             = undef,
   $log_templates      = false,
   $actionfiletemplate = false
@@ -49,6 +51,13 @@ class rsyslog::client (
   rsyslog::snippet { $rsyslog::client_conf:
     ensure  => present,
     content => $content_real,
+  }
+
+  if $remote_relp {
+    rsyslog::snippet { '99-relp':
+      content => template("${module_name}/client_relp.conf.erb"),
+      ensure  => present,
+    }
   }
 
   if $rsyslog::ssl and $ssl_ca == undef {
